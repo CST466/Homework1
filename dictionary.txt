@@ -1,4 +1,3 @@
-a
 able
 about
 above
@@ -16,9 +15,7 @@ all
 allow
 also
 always
-am
 among
-an
 and
 anger
 animal
@@ -32,9 +29,7 @@ arm
 arrange
 arrive
 art
-as
 ask
-at
 atom
 baby
 back
@@ -46,7 +41,6 @@ bar
 base
 basic
 bat
-be
 bear
 beat
 beauty
@@ -95,7 +89,6 @@ burn
 busy
 but
 buy
-by
 call
 came
 camp
@@ -211,13 +204,12 @@ discuss
 distant
 divide
 division
-do
 doctor
 does
 dog
 dollar
-don't
 done
+dont
 door
 double
 down
@@ -338,7 +330,6 @@ girl
 give
 glad
 glass
-go
 gold
 gone
 good
@@ -366,7 +357,6 @@ hard
 has
 hat
 have
-he
 head
 hear
 heard
@@ -397,12 +387,9 @@ human
 hundred
 hunt
 hurry
-i
 ice
 idea
-if
 imagine
-in
 inch
 include
 indicate
@@ -413,9 +400,7 @@ instrument
 interest
 invent
 iron
-is
 island
-it
 job
 join
 joy
@@ -489,7 +474,6 @@ match
 material
 matter
 may
-me
 mean
 meant
 measure
@@ -528,7 +512,6 @@ much
 multiply
 music
 must
-my
 name
 nation
 natural
@@ -543,7 +526,6 @@ new
 next
 night
 nine
-no
 noise
 noon
 nor
@@ -560,22 +542,18 @@ object
 observe
 occur
 ocean
-of
 off
 offer
 office
 often
-oh
 oil
 old
-on
 once
 one
 only
 open
 operate
 opposite
-or
 order
 organ
 original
@@ -774,7 +752,6 @@ small
 smell
 smile
 snow
-so
 soft
 soil
 soldier
@@ -886,7 +863,6 @@ tie
 time
 tiny
 tire
-to
 together
 told
 tone
@@ -917,8 +893,6 @@ type
 under
 unit
 until
-up
-us
 use
 usual
 valley
@@ -943,7 +917,6 @@ watch
 water
 wave
 way
-we
 wear
 weather
 week
@@ -978,8 +951,8 @@ wish
 with
 woman
 women
-won't
 wonder
+wont
 wood
 word
 work

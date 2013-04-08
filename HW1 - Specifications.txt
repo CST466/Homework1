@@ -1,0 +1,24 @@
+CST 466 HW1 Specifications
+
+1.
+
+Input plain-text specifications
+	Must be in plain-text ascii. No binary documents(Word, etc) will valid.
+	Only alphabetic symbols will be accepted. Numerals will be ignored.
+	All alphabetic symbols will be converted to lowercase.
+	Spaces in the plain-text will be ignored.
+	
+	
+	
+	
+3.) Cryptoanalysis
+
+How to determine if file is plain-text or binary? We could go byte byte to check the range of the characters.
+	If a byte is outside of the range of ascii, then we know it's not a plain-text file.
+	
+	
+
+
+Limitations:
+	Only Caesar Cyphered text can be analysed.
+	Only lower-case cypher-text can be analysed.

@@ -1,0 +1,62 @@
+
+Get filesize of cypher-file.
+Allocate a buffer for the cypher-file.
+Load cypher-file into buffer called cypher_file;
+
+if file is binary file
+	print error message and exit program.
+	
+Load dictionary file into an array of strings.
+Create array wordcount[26]. One wordcount for each Ceaser Cypher key. The wordcount	with the highest value is the correct key.
+
+string word_buffer;
+word_buffer.resize(SIZE_OF_CRYPTO_TEXT);
+
+
+for(int key_index = 0; key_index < NUM_POSSIBLE_KEYS; ++key_index)
+{
+	for(int word_start = 0; word_start < ALPHABET_LENGTH; ++word_start)
+	{
+		for(int word_end = word_start + 1; word_end < ALPHABET_LENGTH; ++word_end)
+		{
+			string possible_word = word_buffer.substr( word_start, word_end - word_start);
+			
+			perform a binary search of possible_word in dictionary.
+			If match found, increment wordcount[i];
+		}
+	}
+	Change cypher_key and change contents of word_buffer to reflect new key.
+}
+
+
+bool isPlainText(string file_name)
+{
+	size_t file_size = filesize(file_name.cstr());
+	char * file_contents = new char[file_size];
+	
+	ifstream in_file;
+	in_file.open( file_name.cstr(), ios::binary | ios::in);
+	in_file.read(file_contents, file_size);
+	in_file.close();
+	
+	bool is_plain_text = true;
+	
+	for(int i = 0; i < file_size && is_plain_text; ++i)
+	{
+		// Conditions for file data not being ascii text
+		if( (file_contents[i] < 9) || (file_contents[i] > 13 && file_contents[i] < 32) || (file_contents[i] > 126))
+		{
+			is_plain_text = false;	
+		}
+	}
+	
+	return is_plain_text;
+
+}
+// Taken from http://stackoverflow.com/questions/5840148/how-can-i-get-a-files-size-in-c
+std::ifstream::pos_type filesize(const char* filename)
+{
+    std::ifstream in(filename, std::ifstream::in | std::ifstream::binary);
+    in.seekg(0, std::ifstream::end);
+    return in.tellg(); 
+}

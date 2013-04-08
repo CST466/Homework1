@@ -1,4 +1,9 @@
 
+if argv != 2
+	print usage directions.
+	
+Get cypher-file name from argv
+
 Get filesize of cypher-file.
 Allocate a buffer for the cypher-file.
 Load cypher-file into buffer called cypher_file;
@@ -44,6 +49,7 @@ bool isPlainText(string file_name)
 	for(int i = 0; i < file_size && is_plain_text; ++i)
 	{
 		// Conditions for file data not being ascii text
+		// from http://stackoverflow.com/questions/277521/how-to-identify-the-file-content-as-ascii-or-binary
 		if( (file_contents[i] < 9) || (file_contents[i] > 13 && file_contents[i] < 32) || (file_contents[i] > 126))
 		{
 			is_plain_text = false;	

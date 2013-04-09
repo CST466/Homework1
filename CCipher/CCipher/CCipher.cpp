@@ -1,18 +1,33 @@
 #include <fstream>
 #include <iostream>
-// USAGE
-// CCipher [[option][key]] {source.txt}
+using std::cout;
+// USAGE:  this program encrypts or decrypts a text file given a key and source file
+// CCipher <option> <key> <source.txt>
 // option
 //	-d decrypt
 //	-e encrypt
+//	-h help
 // Key
 //	number to shift
 // source.txt
 //	file to encrypt/decrypt
 int main(int argc, char *argv[])
 {
-	if(argc != 4)
-		cout << "usage: " << argv[0] << "
+	bool haveOption = false;
+	bool haveKey = false;
+	bool haveFile = false;
+
+	if(argc != 4 )
+		cout << "usage: " << argv[0] << "<option> <key> <source.txt>\n";
+	else
+	{
+		cout << "you entered: ";
+		for( int i(0); i<argc; i++)
+		{
+			cout << argv[i];
+		}
+		cout << '\n';
+	}
 }
 
 

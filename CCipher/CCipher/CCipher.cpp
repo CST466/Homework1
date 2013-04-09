@@ -1,6 +1,7 @@
 #include <fstream>
 #include <iostream>
-
+#include <string>
+using std::string;
 using std::cout;
 // USAGE:  this program encrypts or decrypts a text file given a key and source file
 // CCipher <option> <key> <source.txt>
@@ -16,16 +17,7 @@ void Decrypt(char * plain_text, int key);
 void Encrypt(char * plain_text, int key);
 int main(int argc, char *argv[])
 {
-	char * string = "abcdefgxyzdragoncannon\0";
 	char tmpStr[3000];
-	strcpy(tmpStr,string);
-	cout << "Origonal String: " << tmpStr;
-	Encrypt(tmpStr,1);
-	cout << "\nEncrypted String: " <<tmpStr;
-	Decrypt(tmpStr,1);
-	cout << "\nDecrypted String: " << tmpStr;
-	cout << '\n';
-
 	bool haveOption = false;
 	bool haveKey = false;
 	bool haveFile = false;
@@ -33,23 +25,25 @@ int main(int argc, char *argv[])
 	int key(0);
 	if(argc != 4)
 	{
-		cout << "usage: " << argv[0] << "<option> <key> <source.txt>\n";
 		if(toupper(argv[1][1]) == 'H')
 		{
 			cout << 
-				"CCipher.exe\n" <<
+				"<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<CCipher.exe>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>\n" <<
 				"This program encrypts/decripts text given a text file containing pure text\n" <<
-				"Text must be lowercase with no spaces to encrypt and all uppercase with no spaces to decrypt\n" <<
-				"A new text file is generated for each encrypt/decrypt/n" <<
-				"It's essentally usless...\n"
+				"Text must be lowercase with no spaces to encrypt\n" <<
+				"and all uppercase with no spaces to decrypt\n" <<
+				"A new text file is generated for each encrypt/decrypt\n\n" <<
+				"It's essentally usless...\n" <<
+				"Unless you are trying to hide something from your Mom\n\n" <<
 				"Options: \n" <<
 				"-d decrypt\n" <<
 				"-e encrypt\n\n" <<
 				"Key: number used to encrypt/decrypt\n\n" <<
 				"Source: Text file to be decrypted/encrypted\n";
 		}
+		cout << "usage: " << argv[0] << "<option> <key> <source.txt>\n";
 	}
-	else if (argc = 4)
+	else if (argc = 3)
 	{
 		// check options
 		if(toupper(argv[1][1]) == 'D')
@@ -68,6 +62,7 @@ int main(int argc, char *argv[])
 		}
 		// get key and make sure it is not shifted zero times
 		key = atoi(argv[2]);
+		haveKey = true;
 		while(key % 26 == 0)
 		{
 			cout << "!WARNING! Key is Zero! Enter new key: ";
@@ -79,6 +74,7 @@ int main(int argc, char *argv[])
 		if(TextFile.is_open())
 		{
 			TextFile >> tmpStr;
+			haveFile = true;
 		}
 		else
 		{
@@ -86,33 +82,45 @@ int main(int argc, char *argv[])
 		}
 		if(haveFile && haveKey && haveOption)
 		{
+			std::string outFileName;
 			// if decrypt
 			if(!encrypt)
 			{
-				// open text file
-				// store in temp string
-				// decrypt
 				// write to a file
+				Decrypt(tmpStr,key);// decrypt
+				outFileName += "Decrypted ";
+				outFileName += argv[3];
+				std::ofstream decryptedFile(outFileName.c_str());
+				if(decryptedFile.is_open())
+				{
+					decryptedFile << tmpStr;
+					decryptedFile.close();
+				}
+				else
+				{
+					cout << "Output file cannot be opened!\n";
+				}
+
 			}
 			//else if encrypt
 			else
 			{
-				// convert key to a number and store
-				// open text file
-				// store in temp string
+				Encrypt(tmpStr,key);
+				outFileName += "Encrypted ";
+				outFileName += argv[3];
+				std::ofstream encryptedFile(outFileName.c_str());
+				if(encryptedFile.is_open())
+				{
+					encryptedFile << tmpStr;
+					encryptedFile.close();
+				}
+				else
+				{
+					cout << "Output file cannot be opened!/n";
+				}
 				// write out to file
 			}
 		}
-		//else you are wrong
-		else
-		{
-		}
-		cout << "you entered: ";
-		for( int i(0); i<argc; i++)
-		{
-			cout << argv[i];
-		}
-		cout << '\n';
 	}
 	else
 	{

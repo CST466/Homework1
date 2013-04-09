@@ -72,6 +72,7 @@ int main(int argc, char *argv[])
 		{
 			cout << "!WARNING! Key is Zero! Enter new key: ";
 			std::cin >> key;
+			haveKey = true;
 		}
 		// check source
 		std::ifstream TextFile(argv[3]);
@@ -83,23 +84,29 @@ int main(int argc, char *argv[])
 		{
 			cout << "\"" << argv[3] << "\" cannot be opened!\n";
 		}
-		// if decrypt
-		if(!encrypt)
+		if(haveFile && haveKey && haveOption)
 		{
-			// open text file
-			// store in temp string
-			// decrypt
-			// write to a file
-		}
-		//else if encrypt
-		else
-		{
-			// convert key to a number and store
-			// open text file
-			// store in temp string
-			// write out to file
+			// if decrypt
+			if(!encrypt)
+			{
+				// open text file
+				// store in temp string
+				// decrypt
+				// write to a file
+			}
+			//else if encrypt
+			else
+			{
+				// convert key to a number and store
+				// open text file
+				// store in temp string
+				// write out to file
+			}
 		}
 		//else you are wrong
+		else
+		{
+		}
 		cout << "you entered: ";
 		for( int i(0); i<argc; i++)
 		{

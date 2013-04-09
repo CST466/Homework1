@@ -1,5 +1,6 @@
 #include <fstream>
 #include <iostream>
+
 using std::cout;
 // USAGE:  this program encrypts or decrypts a text file given a key and source file
 // CCipher <option> <key> <source.txt>
@@ -16,13 +17,13 @@ void Encrypt(char * plain_text, int key);
 int main(int argc, char *argv[])
 {
 	char * string = "abcdefgxyzdragoncannon\0";
-	char tmp[300];
-	strcpy(tmp,string);
-	cout << "Origonal String: " << tmp;
-	Encrypt(tmp,1);
-	cout << "\nEncrypted String: " <<tmp;
-	Decrypt(tmp,1);
-	cout << "\nDecrypted String: " << tmp;
+	char tmpStr[3000];
+	strcpy(tmpStr,string);
+	cout << "Origonal String: " << tmpStr;
+	Encrypt(tmpStr,1);
+	cout << "\nEncrypted String: " <<tmpStr;
+	Decrypt(tmpStr,1);
+	cout << "\nDecrypted String: " << tmpStr;
 	cout << '\n';
 
 	bool haveOption = false;
@@ -73,18 +74,31 @@ int main(int argc, char *argv[])
 			std::cin >> key;
 		}
 		// check source
-
+		std::ifstream TextFile(argv[3]);
+		if(TextFile.is_open())
+		{
+			TextFile >> tmpStr;
+		}
+		else
+		{
+			cout << "\"" << argv[3] << "\" cannot be opened!\n";
+		}
 		// if decrypt
-			// convert key to number and store
+		if(!encrypt)
+		{
 			// open text file
 			// store in temp string
 			// decrypt
 			// write to a file
+		}
 		//else if encrypt
+		else
+		{
 			// convert key to a number and store
 			// open text file
 			// store in temp string
 			// write out to file
+		}
 		//else you are wrong
 		cout << "you entered: ";
 		for( int i(0); i<argc; i++)

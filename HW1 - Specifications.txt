@@ -4,10 +4,9 @@ CST 466 HW1 Specifications
 
 Input plain-text specifications
 	Must be in plain-text ascii. No binary documents(Word, etc) will be valid.
-	Only alphabetic symbols will be accepted. Numerals will be ignored.
+	Only alphabetic symbols will be accepted. Nonalphabetic will be ignored.
 	All alphabetic symbols will be converted to lowercase for decryption.
 	All alphabetic symbols will be converted to uppercase for encryption.
-	Spaces and other fromating symbols will not exist.
 	A key of zero will be invalid.
 	Must be able to be used from the command line.
 	

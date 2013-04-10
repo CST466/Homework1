@@ -48,6 +48,7 @@ int main(int argc, char *argv[])
 	}
 	else if (argc = 3)
 	{
+	size_t file_size = filesize(argv[3]);
 		// check options
 		if(toupper(argv[1][1]) == 'D')
 		{
@@ -76,8 +77,7 @@ int main(int argc, char *argv[])
 		std::ifstream TextFile(argv[3]);
 		if(TextFile.is_open())
 		{
-			size_t file_size = filesize(argv[3]);
-			tmpStr = new char[file_size];
+			tmpStr = new char[file_size+1];
 			if(isPlainText(argv[3]))
 			{
 				TextFile.read(tmpStr,file_size);
@@ -107,14 +107,14 @@ int main(int argc, char *argv[])
 				std::ofstream decryptedFile(outFileName.c_str());
 				if(decryptedFile.is_open())
 				{
-					decryptedFile << tmpStr;
+					decryptedFile.write(tmpStr,file_size);
 					decryptedFile.close();
+					delete [] tmpStr;
 				}
 				else
 				{
 					cout << "Output file cannot be opened!\n";
 				}
-				delete tmpStr;
 			}
 			//else if encrypt
 			else
@@ -125,8 +125,9 @@ int main(int argc, char *argv[])
 				std::ofstream encryptedFile(outFileName.c_str());
 				if(encryptedFile.is_open())
 				{
-					encryptedFile << tmpStr;
+					encryptedFile.write(tmpStr,file_size);
 					encryptedFile.close();
+					delete [] tmpStr;
 				}
 				else
 				{
@@ -193,7 +194,7 @@ bool isPlainText(string file_name)
 			is_plain_text = false;	
 		}
 	}
-	delete file_contents;
+	delete [] file_contents;
 	return is_plain_text;
 }
 std::ifstream::pos_type filesize(const char* filename)

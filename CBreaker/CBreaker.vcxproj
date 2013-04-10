@@ -78,6 +78,16 @@
   <ItemGroup>
     <ClCompile Include="CBreaker\CBreaker.cpp" />
   </ItemGroup>
+  <ItemGroup>
+    <Text Include="CBreaker\dictionary.txt" />
+    <Text Include="CBreaker\test.txt" />
+    <Text Include="Debug\dictionary.txt" />
+    <Text Include="Debug\test.txt" />
+    <Text Include="dictionary.txt" />
+    <Text Include="Encrypted Bible.txt" />
+    <Text Include="Encrypted robot.txt" />
+    <Text Include="test.txt" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

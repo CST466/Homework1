@@ -19,4 +19,30 @@
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
+  <ItemGroup>
+    <Text Include="Debug\dictionary.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="CBreaker\dictionary.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="dictionary.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="test.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="CBreaker\test.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="Debug\test.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="Encrypted robot.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="Encrypted Bible.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+  </ItemGroup>
 </Project>

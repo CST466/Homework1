@@ -20,7 +20,7 @@ std::ifstream::pos_type filesize(const char* filename);
 bool isPlainText(string file_name);
 int main(int argc, char *argv[])
 {
-	char tmpStr[3000];
+	char * tmpStr;
 	bool haveOption = false;
 	bool haveKey = false;
 	bool haveFile = false;
@@ -76,14 +76,17 @@ int main(int argc, char *argv[])
 		std::ifstream TextFile(argv[3]);
 		if(TextFile.is_open())
 		{
+			size_t file_size = filesize(argv[3]);
+			tmpStr = new char[file_size];
 			if(isPlainText(argv[3]))
 			{
-				TextFile >> tmpStr;
+				TextFile.read(tmpStr,file_size);
+				tmpStr[file_size] = '\0';
 				haveFile = true;
 			}
 			else
 			{
-				cout << "NOT A TEXT FILE!!";
+				cout << argv[3] << " IS NOT A TEXT FILE!!\n";
 				haveFile = false;
 			}
 		}
@@ -111,7 +114,7 @@ int main(int argc, char *argv[])
 				{
 					cout << "Output file cannot be opened!\n";
 				}
-
+				delete tmpStr;
 			}
 			//else if encrypt
 			else
@@ -148,7 +151,10 @@ void Encrypt(char * plain_text, int key)
 	key = key % 26;
 	for(int i = 0; i < length; ++i)
 	{
-		plain_text[i] = (plain_text[i] - 'a' + (signed char)key ) % 26 + 'A';
+		if((plain_text[i] <= 'Z' && plain_text[i] >= 'A') || (plain_text[i] <= 'z' && plain_text[i] >= 'a') )
+		{
+			plain_text[i] = (plain_text[i] - 'a' + (signed char)key ) % 26 + 'A';
+		}
 	}
 }
 
@@ -158,8 +164,11 @@ void Decrypt(char * encrypted_text, int key)
 	key = key % 26;
 	for(int i = 0; i < length; ++i)
 	{
-		encrypted_text[i] = (encrypted_text[i] - 'A' - key) % 26 + 'a';
-		encrypted_text[i] = encrypted_text[i] < 'a' ? encrypted_text[i] + 26 : encrypted_text[i];
+		if((encrypted_text[i] <= 'Z' && encrypted_text[i] >= 'A') || (encrypted_text[i] <= 'z' && encrypted_text[i] >= 'a') )  
+		{
+			encrypted_text[i] = (encrypted_text[i] - 'A' - key) % 26 + 'a';
+			encrypted_text[i] = encrypted_text[i] < 'a' ? encrypted_text[i] + 26 : encrypted_text[i];
+		}
 	}
 }
 

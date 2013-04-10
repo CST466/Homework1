@@ -3,6 +3,8 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CCipher", "CCipher\CCipher.vcxproj", "{C7BDC14B-B81C-44CD-94AF-465BD2A026B5}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CBreaker", "..\CBreaker\CBreaker.vcxproj", "{CF8A2383-5EDC-412D-98BB-1BB6BA1358DF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -13,6 +15,10 @@ Global
 		{C7BDC14B-B81C-44CD-94AF-465BD2A026B5}.Debug|Win32.Build.0 = Debug|Win32
 		{C7BDC14B-B81C-44CD-94AF-465BD2A026B5}.Release|Win32.ActiveCfg = Release|Win32
 		{C7BDC14B-B81C-44CD-94AF-465BD2A026B5}.Release|Win32.Build.0 = Release|Win32
+		{CF8A2383-5EDC-412D-98BB-1BB6BA1358DF}.Debug|Win32.ActiveCfg = Debug|Win32
+		{CF8A2383-5EDC-412D-98BB-1BB6BA1358DF}.Debug|Win32.Build.0 = Debug|Win32
+		{CF8A2383-5EDC-412D-98BB-1BB6BA1358DF}.Release|Win32.ActiveCfg = Release|Win32
+		{CF8A2383-5EDC-412D-98BB-1BB6BA1358DF}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -86,6 +86,7 @@
     <Text Include="dictionary.txt" />
     <Text Include="Encrypted Bible.txt" />
     <Text Include="Encrypted robot.txt" />
+    <Text Include="Encrypted test.txt" />
     <Text Include="test.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

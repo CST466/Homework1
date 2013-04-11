@@ -44,5 +44,8 @@
     <Text Include="Encrypted Bible.txt">
       <Filter>Resource Files</Filter>
     </Text>
+    <Text Include="Encrypted test.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
   </ItemGroup>
 </Project>

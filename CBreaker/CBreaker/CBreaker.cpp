@@ -12,14 +12,9 @@ using std::cout;
 using std::vector;
 using std::getline;
 
-// USAGE:  this program encrypts or decrypts a text file given a key and source file
-// CCipher <option> <key> <source.txt>
-// option
-//	-d decrypt
-//	-e encrypt
-//	-h help
-// Key
-//	number to shift
+// USAGE:  this program breaks a Ceasar Cipher and displays the key used as well 
+//			as generates an decrypted output file
+// CBreaker <source.txt>
 // source.txt
 //	file to encrypt/decrypt
 void Encrypt(const char * const plain_text, char * cipher_text, int key);
@@ -29,39 +24,79 @@ void Decrypt(const char * const encrypted_text, char * plain_text, int key);
 bool LoadDictionary( vector<string> & dictionary);
 int main(int argc, char *argv[])
 {
-	
-	int correct_key(0);
-	string cipher_file_name("Encrypted Bible.txt");//argv[1]);
-	int cipher_file_size = filesize(cipher_file_name.c_str());
-	string cipher_file_text;
-	LoadFileIntoString(cipher_file_text, cipher_file_name);
-	vector<string> dictionary;
-	LoadDictionary(dictionary);
-	// Create array of 26 wordcounts, one for each key. The key that presents the highest number of word matches is the correct key.
-	int word_counts[NUM_OF_KEYS];
-	memset(word_counts, 0, sizeof(int) * NUM_OF_KEYS);
-	// for each possible key
-	for(int key_index = 0; key_index < NUM_OF_KEYS; ++key_index)
+	if(argc != 1)
 	{
-		
-		char cipher_decrypt[9000];
-
-		Decrypt(cipher_file_text.c_str(), cipher_decrypt, key_index);
-		
-		string cipher_decrypt_temp(cipher_decrypt);
-		for(int word_start = 0; word_start < cipher_file_text.size(); ++word_start)
+		int correct_key(0);
+		string cipher_file_name(argv[1]);
+		int cipher_file_size = filesize(cipher_file_name.c_str());
+		string cipher_file_text;
+		if(LoadFileIntoString(cipher_file_text, cipher_file_name))
 		{
-			for(int word_end = word_start + 3; word_end < cipher_file_text.size() && ((word_end - word_start) < 12); ++word_end)
+			vector<string> dictionary;
+			LoadDictionary(dictionary);
+			// Create array of 26 wordcounts, one for each key. The key that presents the highest number of word matches is the correct key.
+			int word_counts[NUM_OF_KEYS];
+			memset(word_counts, 0, sizeof(int) * NUM_OF_KEYS);
+			// for each possible key
+			for(int key_index = 0; key_index < NUM_OF_KEYS; ++key_index)
 			{
-			
-				string possible_word = cipher_decrypt_temp.substr( word_start, word_end - word_start);
-				// http://www.cplusplus.com/reference/algorithm/binary_search/
-				if (std::binary_search (dictionary.begin(), dictionary.end(), possible_word))
+				
+				char cipher_decrypt[9000];
+
+				Decrypt(cipher_file_text.c_str(), cipher_decrypt, key_index);
+				
+				string cipher_decrypt_temp(cipher_decrypt);
+				for(int word_start = 0; word_start < cipher_file_text.size(); ++word_start)
 				{
-					++word_counts[key_index];
+					for(int word_end = word_start + 3; word_end < cipher_file_text.size() && ((word_end - word_start) < 12); ++word_end)
+					{
+					
+						string possible_word = cipher_decrypt_temp.substr( word_start, word_end - word_start);
+						// http://www.cplusplus.com/reference/algorithm/binary_search/
+						if (std::binary_search (dictionary.begin(), dictionary.end(), possible_word))
+						{
+							++word_counts[key_index];
+						}
+					}
 				}
 			}
+			//find key
+			int key(word_counts[0]);
+			for(int i(0); i<NUM_OF_KEYS; i++)
+			{
+				if(word_counts[i] > key)
+				{
+					key = word_counts[i];
+				}
+			}
+			//display key
+			cout << "Key: " << key << "\n";
+			//decrypt text
+			char * deciphered_text = new char[cipher_file_size];
+			Decrypt(cipher_file_text.c_str(), deciphered_text, key);
+			//send to output file
+			string outputFileName("Decrypted ");
+			outputFileName += argv[1];
+			std::ofstream Decipherd_file;
+			Decipherd_file.open(outputFileName);
+			if(Decipherd_file.is_open())
+			{
+				Decipherd_file.write(deciphered_text,cipher_file_size);
+				Decipherd_file.close();
+			}
+			else
+			{
+				cout << "File could not be opened!\n";
+			}
 		}
+		else
+		{
+			cout << argv[1] << " could not be opened!\n";
+		}
+	}
+	else
+	{
+		cout << "Proper syntax is CBreaker.exe fileToDecrypt.txt\n";
 	}
 }
 

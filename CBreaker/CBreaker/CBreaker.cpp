@@ -24,7 +24,7 @@ void Decrypt(const char * const encrypted_text, char * plain_text, int key);
 bool LoadDictionary( vector<string> & dictionary);
 int main(int argc, char *argv[])
 {
-	if(argc != 1)
+	if(argc == 2)
 	{
 		int correct_key(0);
 		string cipher_file_name(argv[1]);
@@ -61,12 +61,14 @@ int main(int argc, char *argv[])
 				}
 			}
 			//find key
-			int key(word_counts[0]);
+			int max(word_counts[0]);
+			int key(0);
 			for(int i(0); i<NUM_OF_KEYS; i++)
 			{
-				if(word_counts[i] > key)
+				if(word_counts[i] > max )
 				{
-					key = word_counts[i];
+					max = word_counts[i];
+					key = i;
 				}
 			}
 			//display key
@@ -74,6 +76,8 @@ int main(int argc, char *argv[])
 			//decrypt text
 			char * deciphered_text = new char[cipher_file_size];
 			Decrypt(cipher_file_text.c_str(), deciphered_text, key);
+			//cout for debugging purposes
+			//cout << deciphered_text;
 			//send to output file
 			string outputFileName("Decrypted ");
 			outputFileName += argv[1];
@@ -107,10 +111,17 @@ void Encrypt(const char * const plain_text, char * cipher_text, int key)
 	key = key % 26;
 	for(int i = 0; i < length; ++i)
 	{
-		cipher_text[i] = (plain_text[i] - 'a' + (signed char)key ) % 26 + 'A';
+		if((plain_text[i] <= 'Z' && plain_text[i] >= 'A') || (plain_text[i] <= 'z' && plain_text[i] >= 'a') )
+		{
+			cipher_text[i] = (plain_text[i] - 'a' + (signed char)key ) % 26 + 'A';
+		}
+		else
+		{
+			cipher_text[i] = plain_text[i];
+		}
 	}
 	
-	cipher_text[length + 1] = '\0';
+	cipher_text[length] = '\0';
 }
 
 void Decrypt(const char * const encrypted_text, char * plain_text, int key)
@@ -119,10 +130,17 @@ void Decrypt(const char * const encrypted_text, char * plain_text, int key)
 	key = key % 26;
 	for(int i = 0; i < length; ++i)
 	{
-		plain_text[i] = (toupper(encrypted_text[i]) - 'A' - key) % 26 + 'a';
-		plain_text[i] = plain_text[i] < 'a' ? plain_text[i] + 26 : plain_text[i];
+		if((encrypted_text[i] <= 'Z' && encrypted_text[i] >= 'A') || (encrypted_text[i] <= 'z' && encrypted_text[i] >= 'a') )
+		{
+			plain_text[i] = (toupper(encrypted_text[i]) - 'A' - key) % 26 + 'a';
+			plain_text[i] = plain_text[i] < 'a' ? plain_text[i] + 26 : plain_text[i];
+		}
+		else
+		{
+			plain_text[i] = encrypted_text[i];
+		}
 	}
-	plain_text[length + 1] = '\0';
+	plain_text[length] = '\0';
 }
 
 
@@ -187,7 +205,8 @@ bool LoadFileIntoString( string & str, const string & file_name)
 	if(input_file.is_open())
 	{
 		str = string((std::istreambuf_iterator<char>(input_file)), std::istreambuf_iterator<char>());
-		str.resize(4096);
+		//This line breaks the word finding algorthim
+		//str.resize(4096);
 		input_file.close();
 		success = true;
 	}

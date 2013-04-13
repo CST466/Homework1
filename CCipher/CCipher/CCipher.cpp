@@ -152,6 +152,7 @@ void Encrypt(char * plain_text, int key)
 	key = key % 26;
 	for(int i = 0; i < length; ++i)
 	{
+		plain_text[i] = tolower(plain_text[i]);
 		if((plain_text[i] <= 'Z' && plain_text[i] >= 'A') || (plain_text[i] <= 'z' && plain_text[i] >= 'a') )
 		{
 			plain_text[i] = (plain_text[i] - 'a' + (signed char)key ) % 26 + 'A';

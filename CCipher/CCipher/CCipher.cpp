@@ -26,9 +26,9 @@ int main(int argc, char *argv[])
 	bool haveFile = false;
 	bool encrypt = false;
 	int key(0);
-	if(argc != 4)
+	if(argc != 3)
 	{
-		if(toupper(argv[1][1]) == 'H')
+		if( argc > 1 && toupper(argv[1][1]) == 'H')
 		{
 			cout << 
 				"<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<CCipher.exe>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>\n" <<

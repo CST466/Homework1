@@ -26,7 +26,7 @@ int main(int argc, char *argv[])
 	bool haveFile = false;
 	bool encrypt = false;
 	int key(0);
-	if(argc != 3)
+	if(argc != 4)
 	{
 		if( argc > 1 && toupper(argv[1][1]) == 'H')
 		{
@@ -46,7 +46,7 @@ int main(int argc, char *argv[])
 		}
 		cout << "usage: " << argv[0] << "<option> <key> <source.txt>\n";
 	}
-	else if (argc = 3)
+	else if (argc == 4)
 	{
 	size_t file_size = filesize(argv[3]);
 		// check options
@@ -74,7 +74,7 @@ int main(int argc, char *argv[])
 			haveKey = true;
 		}
 		// check source
-		std::ifstream TextFile(argv[3]);
+		std::ifstream TextFile(argv[3], std::ios::binary);
 		if(TextFile.is_open())
 		{
 			tmpStr = new char[file_size+1];
@@ -104,7 +104,7 @@ int main(int argc, char *argv[])
 				Decrypt(tmpStr,key);// decrypt
 				outFileName += "Decrypted ";
 				outFileName += argv[3];
-				std::ofstream decryptedFile(outFileName.c_str());
+				std::ofstream decryptedFile(outFileName.c_str(), std::ios::binary);
 				if(decryptedFile.is_open())
 				{
 					decryptedFile.write(tmpStr,file_size);
@@ -122,7 +122,7 @@ int main(int argc, char *argv[])
 				Encrypt(tmpStr,key);
 				outFileName += "Encrypted ";
 				outFileName += argv[3];
-				std::ofstream encryptedFile(outFileName.c_str());
+				std::ofstream encryptedFile(outFileName.c_str(), std::ios::binary);
 				if(encryptedFile.is_open())
 				{
 					encryptedFile.write(tmpStr,file_size);
